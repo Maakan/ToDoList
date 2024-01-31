@@ -30,14 +30,21 @@ public class TaskHandler {
       Task task = tasksToHandle.get(i);
       if (task.getIndex() == updatedTask.getIndex()) {
         tasksToHandle.set(i, updatedTask);
-        break; // Ajout du break pour sortir de la boucle une fois la tâche mise à jour
+        break;
       }
     }
     return tasksToHandle;
   }
 
   public List<Task> deleteTask(int index){
-    tasksToHandle.remove(index);
-    return tasksToHandle;
+     tasksToHandle.remove(index);
+     updateIndexes();
+     return tasksToHandle;
+  }
+
+  private void updateIndexes() {
+    for (int i = 0; i < tasksToHandle.size(); i++) {
+      tasksToHandle.get(i).setIndex(i);
+    }
   }
 }
