@@ -1,12 +1,9 @@
 package com.project.todoList.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.todoList.handlers.TaskHandler;
 import com.project.todoList.models.Task;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
