@@ -9,10 +9,14 @@ public class Task {
   }
   public String title;
   public String description;
+  private int index;
+  private static int taskCounter= 0;
 
   public Task(String title, String description){
     this.title = title;
     this.description = description;
+    this.taskState = TaskState.TODO;
+    this.index = getNextIndex();
   }
 
   public void setTitle(String title){
@@ -37,5 +41,14 @@ public class Task {
 
   public TaskState getTaskState() {
     return taskState;
+  }
+  public int getIndex() {
+    return index;
+  }
+  public void setIndex(int index){
+    this.index = index;
+  }
+  private static synchronized int getNextIndex() {
+    return taskCounter++;
   }
 }

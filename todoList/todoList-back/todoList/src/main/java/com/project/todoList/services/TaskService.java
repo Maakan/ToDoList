@@ -1,7 +1,9 @@
 package com.project.todoList.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.todoList.handlers.TaskHandler;
 import com.project.todoList.models.Task;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,28 +13,28 @@ import java.util.List;
 public class TaskService {
 
   public List<Task> tasks;
+
+  public TaskHandler taskHandler;
   public TaskService(){
-  initializeTasks();
+    this.taskHandler = new TaskHandler();
   }
 
-  private void initializeTasks(){
-    tasks = new ArrayList<>();
-    tasks.add(new Task("Clean", "Clean my bedroom"));
-    tasks.add(new Task("Study", "Study for my exams"));
-
-  }
   public List<Task> getTasks(){
+    tasks = taskHandler.getTasks();
     return tasks;
   }
-  public void addTasks(List<Task> tasksToAdd){
-      tasks.addAll(tasksToAdd);
+  public List<Task> addTasks(List<Task> tasksToAdd){
+    tasks = taskHandler.addTasks(tasksToAdd);
+    return tasks;
   }
 
-  public void updateTask(int index, Task updatedTask) {
-    tasks.set(index, updatedTask);
+  public List<Task> updateTask(Task updatedTask) {
+    tasks = taskHandler.update(updatedTask);
+    return tasks;
   }
 
-  public void deleteTask(int index) {
-    tasks.remove(index);
+  public List<Task> deleteTask(int index) {
+    tasks = taskHandler.deleteTask(index);
+    return tasks;
   }
 }

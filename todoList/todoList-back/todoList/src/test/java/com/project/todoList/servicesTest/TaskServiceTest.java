@@ -41,18 +41,19 @@ public class TaskServiceTest {
     int beforeLast = tasks.size() -2;
     Task lastAdded = tasks.get(lastindex);
     Task beforeLastAdded = tasks.get(beforeLast);
-    assertEquals("Sport",lastAdded.getTitle());
+    assertEquals("Go to the gym",lastAdded.getDescription());
     assertEquals("Do something meaningful", beforeLastAdded.getTitle());
   }
   @Test
   void updateTasks(){
-    int index = 0;
     Task task = new Task("Do YOGA", "15min of yoga is good");
-    taskService.updateTask(index, task);
-    List<Task> tasks = taskService.getTasks();
+    task.setTaskState(Task.TaskState.DONE);
+    task.setIndex(1);
+    taskService.updateTask(task);
 
-    assertEquals("Do YOGA", tasks.get(index).getTitle());
-    assertEquals("15min of yoga is good", tasks.get(index).getDescription());
+    List<Task> tasks = taskService.getTasks();
+    assertEquals("Do YOGA", tasks.get(1).getTitle());
+    assertEquals("15min of yoga is good", tasks.get(1).getDescription());
   }
   @Test
   void deleteTask(){
