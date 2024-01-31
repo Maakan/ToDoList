@@ -1,0 +1,19 @@
+<h2>My Todo List</h2>
+<ul class="tasks">
+  <li *ngFor="let task of tasks">
+    <label>
+        <span [class.selected]="task === selectedTask" (click)="onSelect(task)">
+          <span class="name" [class.done]="task.isDone">{{task.title}}</span>
+        </span>
+      </label>
+  </li>
+</ul>
+
+<div *ngIf="selectedTask">
+  <h2>{{selectedTask.title | uppercase}} Details</h2>
+  <div>id: {{selectedTask.index}}</div>
+  <div>
+    <label for="task-title">Task: </label>
+    <input id="task-title" [(ngModel)] ="selectedTask.title" placeholder="Title">
+  </div>
+</div>
