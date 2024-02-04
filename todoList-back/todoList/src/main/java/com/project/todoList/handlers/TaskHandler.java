@@ -4,6 +4,7 @@ import com.project.todoList.models.Task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskHandler {
   public List<Task> tasksToHandle;
@@ -37,14 +38,7 @@ public class TaskHandler {
   }
 
   public List<Task> deleteTask(int index){
-     tasksToHandle.remove(index);
-     updateIndexes();
+     tasksToHandle.removeIf(task -> task.getIndex() == index);
      return tasksToHandle;
-  }
-
-  private void updateIndexes() {
-    for (int i = 0; i < tasksToHandle.size(); i++) {
-      tasksToHandle.get(i).setIndex(i);
-    }
   }
 }

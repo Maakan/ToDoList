@@ -47,7 +47,6 @@ public class TaskServiceTest {
   @Test
   void updateTasks(){
     Task task = new Task("Do YOGA", "15min of yoga is good");
-    task.setTaskState(Task.TaskState.DONE);
     task.setIndex(1);
     taskService.updateTask(task);
 

@@ -1,19 +1,32 @@
-<h2>My Todo List</h2>
-<ul class="tasks">
-  <li *ngFor="let task of tasks">
-    <label>
-        <span [class.selected]="task === selectedTask" (click)="onSelect(task)">
-          <span class="name" [class.done]="task.isDone">{{task.title}}</span>
-        </span>
-      </label>
-  </li>
-</ul>
+<div>
+    <h2>My Todo List</h2>
 
-<div *ngIf="selectedTask">
+    <ul class="tasks">
+      <li *ngFor="let task of tasks">
+        <label>
+            <span [class.selected]="task === selectedTask" (click)="onSelect(task)">
+              <span class="name" [class.done]="task.toDo">{{task.title}}</span>
+            </span>
+        </label>
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" (click)="changeStatus(task)">
+      </li>
+    </ul>
+    
+    <h2>List of done tasks</h2>
+    <ul class="tasks">
+        <li *ngFor="let task of doneTasks">
+          <label>
+              <span [class.selected]="task === selectedTask" (click)="onSelect(task)">
+                <span class="crossed" [class.done]="task.toDo">{{task.title}}</span>
+              </span>
+          </label>
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked (click)="changeStatus(task)">
+        </li>
+    </ul>
+</div>
+
+<!-- <div *ngIf="selectedTask">
   <h2>{{selectedTask.title | uppercase}} Details</h2>
   <div>id: {{selectedTask.index}}</div>
-  <div>
-    <label for="task-title">Task: </label>
-    <input id="task-title" [(ngModel)] ="selectedTask.title" placeholder="Title">
-  </div>
 </div>
+-->

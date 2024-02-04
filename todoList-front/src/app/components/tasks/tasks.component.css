@@ -1,0 +1,12 @@
+.crossed{
+    text-decoration: line-through;
+}
+.tasks li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+  
+.tasks .form-check-input {
+    margin-left: 5px; 
+}

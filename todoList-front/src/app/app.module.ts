@@ -6,18 +6,23 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TaskService } from './services/task.service';
 import { TasksComponent } from './components/tasks/tasks.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TaskDetailsComponent } from './components/tasks/taskdetails/task-details/task-details.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TasksComponent
+    TasksComponent,
+    TaskDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [TaskService],
   bootstrap: [AppComponent]

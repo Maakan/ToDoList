@@ -5,6 +5,7 @@ import com.project.todoList.models.Task;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskService {
@@ -19,6 +20,11 @@ public class TaskService {
   public List<Task> getTasks(){
     tasks = taskHandler.getTasks();
     return tasks;
+  }
+  public Optional<Task> getTaskByTitle(String title){
+    Optional<Task> taskByTitle;
+    taskByTitle = taskHandler.getTasks().stream().filter( t -> t.getTitle().equals(title)).findAny();
+    return taskByTitle;
   }
   public List<Task> addTasks(List<Task> tasksToAdd){
     tasks = taskHandler.addTasks(tasksToAdd);

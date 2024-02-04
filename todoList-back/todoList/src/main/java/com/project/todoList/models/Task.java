@@ -1,12 +1,7 @@
 package com.project.todoList.models;
 
 public class Task {
-  public TaskState taskState;
-  public enum TaskState {
-    TODO,
-    DONE;
-
-  }
+  public Boolean toDo;
   public String title;
   public String description;
   private int index;
@@ -15,8 +10,8 @@ public class Task {
   public Task(String title, String description){
     this.title = title;
     this.description = description;
-    this.taskState = TaskState.TODO;
     this.index = getNextIndex();
+    this.toDo = true;
   }
 
   public void setTitle(String title){
@@ -35,12 +30,11 @@ public class Task {
     return description;
   }
 
-  public void setTaskState(TaskState taskState) {
-    this.taskState = taskState;
+  public Boolean getToDo() {
+    return toDo;
   }
-
-  public TaskState getTaskState() {
-    return taskState;
+  public void setTodo(Boolean todo){
+    this.toDo = todo;
   }
   public int getIndex() {
     return index;
