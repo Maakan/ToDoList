@@ -1,5 +1,6 @@
 package com.project.todoList.servicesTest;
 
+import com.project.todoList.handlers.TaskHandler;
 import com.project.todoList.models.Task;
 import com.project.todoList.services.TaskService;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,10 +55,13 @@ public class TaskServiceTest {
     assertEquals("Do YOGA", tasks.get(1).getTitle());
     assertEquals("15min of yoga is good", tasks.get(1).getDescription());
   }
+
   @Test
-  void deleteTask(){
-    int index = 0;
-    taskService.deleteTask(index);
-    assertEquals(1, taskService.getTasks().size());
+  void updateTaskStatus(){
+    List<Task> task = new ArrayList<>(List.copyOf(taskService.getTasks()));
+    task.remove(0);
+    List<Task> tasksToHandle =taskService.updateTaskStatus(task);
+
+    assertEquals("Clean", tasksToHandle.get(0).getTitle());
   }
 }

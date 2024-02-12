@@ -1,5 +1,5 @@
 export interface Task{
-    index: number;
+    index: any;
     title: string;
     description: string;
     toDo: boolean;

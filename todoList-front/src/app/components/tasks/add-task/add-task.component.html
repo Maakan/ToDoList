@@ -1,0 +1,15 @@
+<div class="newTask" >
+    <div class="mb-3">
+        <label for="titleArea" class="form-label">Titre de la tâche</label>
+        <input name="title" [(ngModel)]="task.title" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" required>
+    </div>
+    <div>
+        <label for="description" class="form-label">Description</label>
+        <input name="description" [(ngModel)] ="task.description" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+    </div>
+    <div>
+        <button class="btn btn-primary" (click)="addTask()" *ngIf="task.title.length > 0">
+            Add task
+        </button>
+    </div>
+</div>

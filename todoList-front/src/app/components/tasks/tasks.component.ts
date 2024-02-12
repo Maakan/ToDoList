@@ -3,6 +3,7 @@ import { Task } from '../../models/Task';
 import { TaskService } from '../../services/task.service';
 import { catchError, map } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tasks',
@@ -13,11 +14,12 @@ export class TasksComponent {
   public tasks: Task[] = [];
   public doneTasks: Task[] = [];
   selectedTask?: Task;
-  constructor(private taskService: TaskService){
+  constructor(private taskService: TaskService, private router: Router){
     
   }
   ngOnInit() {
     this.getTasks();
+    this.tasks.sort((a, b) => b.index - a.index);
   }
 
   public getTasks(){
@@ -33,18 +35,6 @@ export class TasksComponent {
   } 
   onSelect(task: Task): void{
     this.selectedTask = task;
-  }
-
-  public deleteTask(index: number){
-    this.taskService.deleteTask(index).pipe(
-      map((response: Task[]) => {
-        this.tasks = response;
-      }),
-      catchError((error:HttpErrorResponse) => {
-        alert(error.message);
-        throw error;
-      })
-    ).subscribe();
   }
 
   public changeStatus(task: Task){
@@ -65,6 +55,23 @@ export class TasksComponent {
     this.tasks = this.tasks.filter(
       t => t.toDo == true
     );
+  }
+
+  public updateTaskStatus(){
+    this.doneTasks.forEach(task => {
+      task.toDo = !task.toDo;
+    })
+    this.taskService.updateTaskStatus(this.doneTasks).pipe(
+      map((response: Task[]) => {
+        this.tasks = response;
+        this.doneTasks = [];
+      }),
+      catchError((error:HttpErrorResponse) => {
+        alert(error.message);
+        throw error;
+      })
+    ).subscribe();
+    this.router.navigate(['/']);
   }
   
 }

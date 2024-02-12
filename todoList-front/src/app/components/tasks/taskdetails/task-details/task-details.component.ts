@@ -6,6 +6,7 @@ import { catchError, map } from 'rxjs';
 import { TaskService } from '../../../../services/task.service';
 import { Task } from '../../../../models/Task';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -14,40 +15,46 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./task-details.component.css']
 })
 export class TaskDetailsComponent {
-  @Input() task?: Task;
-  taskForm: FormGroup;
+  task: Task | undefined;
+  // taskForm: FormGroup;
   tasks: Task[] = [];
-
-  constructor(private formBuilder: FormBuilder, private taskService: TaskService) {
-    this.taskForm = this.formBuilder.group({
-      // Définissez les champs du formulaire selon votre modèle Task
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      // Ajoutez d'autres champs si nécessaire
-    });
+  updateTask: boolean = false;
+  constructor(private taskService: TaskService, private route: ActivatedRoute, private router: Router){
   }
 
   ngOnInit(){
-    
+    this.getTask();
   }
 
-  onSubmit() {
-    if (this.taskForm.valid) {
-      const newTask: Task = this.taskForm.value;
-      
-      // Utilisez le service pour ajouter la nouvelle tâche
-      this.taskService.addTasks([newTask]).pipe(
-        map((response: Task[]) => {
-          this.tasks = response;
-          console.log('Tâche ajoutée avec succès !', response);
-          // Réinitialisez le formulaire après l'ajout
-          this.taskForm.reset();
-        }),
-        catchError((error:HttpErrorResponse) => {
+  getTask(): void{
+    const title: string | null = this.route.snapshot.paramMap.get('title');
+    if(title !== null){
+      this.taskService.getTaskByName(title).pipe(
+        map((t:Task) => {
+          this.task = t;
+          console.log(t);
+        }) ,
+        catchError((error: HttpErrorResponse) => {
           alert(error.message);
           throw error;
-        })
+        }
+        )
       ).subscribe();
     }
+  }
+
+  update(task: Task): void{
+    console.log(task);
+
+    this.taskService.updateTask(task).pipe(
+      map((t: Task[]) =>{
+        this.tasks = t;
+        this.router.navigate(['/']);
+      } ),
+      catchError((error: HttpErrorResponse) => {
+        alert(error.message);
+        throw error;
+      })
+    ).subscribe();
   }
 }

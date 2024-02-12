@@ -10,3 +10,12 @@
 .tasks .form-check-input {
     margin-left: 5px; 
 }
+.checkbox{
+    margin-right: 0;
+}
+.add{
+    margin-top: 10px;
+}
+ul {
+    list-style-type: none;
+  }

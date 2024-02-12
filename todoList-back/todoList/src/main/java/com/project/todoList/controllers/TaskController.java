@@ -24,7 +24,7 @@ public class TaskController {
     List<Task> tasks = taskService.getTasks();
     return new ResponseEntity<>(tasks, HttpStatus.OK);
   }
-  @GetMapping("/{title}")
+  @GetMapping("/detail/{title}")
   public ResponseEntity<Optional<Task>> getTaskByName(@PathVariable String title){
     Optional<Task> task = taskService.getTaskByTitle(title);
     return new ResponseEntity<>(task, HttpStatus.OK);
@@ -38,6 +38,11 @@ public class TaskController {
   @PutMapping("/update")
   public ResponseEntity<List<Task>> updateTask(@RequestBody Task task){
     List<Task> tasks = taskService.updateTask(task);
+    return new ResponseEntity<>(tasks, HttpStatus.OK);
+  }
+  @PutMapping("/updateStatus")
+  public ResponseEntity<List<Task>> updateTaskStatus(@RequestBody  List<Task> updatedTaskStatus){
+    List<Task> tasks = taskService.updateTaskStatus(updatedTaskStatus);
     return new ResponseEntity<>(tasks, HttpStatus.OK);
   }
   @DeleteMapping("/delete/{index}")

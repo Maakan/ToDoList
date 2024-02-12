@@ -37,6 +37,27 @@ public class TaskHandler {
     return tasksToHandle;
   }
 
+  public List<Task> updateTaskStatus(List<Task> updatedTasks) {
+    List<Task> tasksToKeep = new ArrayList<>();
+
+    for (Task task : tasksToHandle) {
+      boolean updated = false;
+      for (Task updatedTask : updatedTasks) {
+        if (task.getIndex() == updatedTask.getIndex()) {
+          task.setTodo(updatedTask.getToDo());
+          updated = true;
+          break;
+        }
+      }
+      if (!updated) {
+        tasksToKeep.add(task);
+      }
+    }
+    tasksToHandle = tasksToKeep;
+    return tasksToHandle;
+  }
+
+
   public List<Task> deleteTask(int index){
      tasksToHandle.removeIf(task -> task.getIndex() == index);
      return tasksToHandle;

@@ -23,7 +23,7 @@ public class TaskService {
   }
   public Optional<Task> getTaskByTitle(String title){
     Optional<Task> taskByTitle;
-    taskByTitle = taskHandler.getTasks().stream().filter( t -> t.getTitle().equals(title)).findAny();
+    taskByTitle = taskHandler.getTasks().stream().filter( t -> t.getTitle().equalsIgnoreCase(title)).findAny();
     return taskByTitle;
   }
   public List<Task> addTasks(List<Task> tasksToAdd){
@@ -38,6 +38,11 @@ public class TaskService {
 
   public List<Task> deleteTask(int index) {
     tasks = taskHandler.deleteTask(index);
+    return tasks;
+  }
+  public List<Task> updateTaskStatus(List<Task> updatedTasks){
+    System.out.println(updatedTasks);
+    tasks = taskHandler.updateTaskStatus(updatedTasks);
     return tasks;
   }
 }
