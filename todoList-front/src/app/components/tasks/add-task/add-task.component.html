@@ -5,7 +5,7 @@
     </div>
     <div>
         <label for="description" class="form-label">Description</label>
-        <input name="description" [(ngModel)] ="task.description" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+        <textarea name="description" [(ngModel)] ="task.description"  class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"></textarea>
     </div>
     <div>
         <button class="btn btn-primary" (click)="addTask()" *ngIf="task.title.length > 0">

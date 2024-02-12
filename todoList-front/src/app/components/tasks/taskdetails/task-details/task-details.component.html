@@ -1,7 +1,7 @@
 
 <div *ngIf="updateTask == false && task">
     <div class="mb-3">
-        <label for="id">Id de la tâche: {{task.index}}</label>
+        
         <div>
             <label for="titleArea" class="form-label">Titre de la tâche</label>
             <input name="title" [(ngModel)]="task.title" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">    
@@ -9,7 +9,7 @@
     </div>
     <div>
         <label for="description" class="form-label">Description</label>
-        <input name="description"[(ngModel)]="task.description" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+        <textarea name="description"[(ngModel)]="task.description" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping"></textarea>
     </div>
         <button class="btn btn-primary" (click)="update(task)" *ngIf="task.title.length > 0">
             Update task
